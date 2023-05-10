@@ -192,6 +192,7 @@ function initPhysWorld(){
     physWorld = new CANNON.World({
         gravity: new CANNON.Vec3(0, -98.1, 0)
     });
+    // define Sleep parameters - taken from https://github.com/pmndrs/cannon-es/blob/master/examples/sleep.html
     physWorld.allowSleep = true;
 }
 
@@ -238,6 +239,7 @@ function initBoxBody(worldVector){
     boxBody.angularDamping = 0.2;
 
     // Sleep parameters
+    //taken from https://github.com/pmndrs/cannon-es/blob/master/examples/sleep.html
     boxBody.allowSleep = true;
     boxBody.sleepSpeedLimit = 0.5 // Body will feel sleepy if speed<1 (speed == norm of velocity)
     boxBody.sleepTimeLimit = 0.1 // Body falls asleep after x sec of sleepiness
@@ -331,6 +333,7 @@ window.addEventListener('resize', function() {
 //   });
 
 // LENAS CODE FOR KEYBOARD CONTROLS
+//taken from https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
 var open = true;
 const startPos = new THREE.Vector3(0,700,0);
 
@@ -373,6 +376,7 @@ window.addEventListener("keydown", function (e) {
 
 //ClLAIRE's CODE
 function initDot(){
+  //taken from https://stackoverflow.com/questions/26297544/three-js-how-to-render-a-simple-white-dot-point-pixel
   //create red dot at origin of world coords and add to scene
   var dotGeometry = new THREE.BufferGeometry();
   dotGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array([0,0,0]), 3 ) );
@@ -391,6 +395,7 @@ function updateDot() {
     currBoxBody = bodyList.slice(-1);
     currPosition = currBoxBody.position;
     //create ray from bottom of box straight down.
+    //raycaster code taken from https://threejs.org/docs/#api/en/core/Raycaster.intersectObject
     var ray = new THREE.Raycaster(meshList[meshList.length - 1].position, new THREE.Vector3(0,-1,0));
     // get all ray intersections
     var intersections = ray.intersectObjects(scene.children,false);
